@@ -3,6 +3,7 @@ import { PgConnection } from '@/infra/repos/postgres/helpers'
 import 'reflect-metadata'
 import { env } from '@/main/config/env'
 import { API, SWAGGER } from '@/utils/constants'
+import { Request, Response } from 'express'
 
 PgConnection.getInstance()
   .connect()
@@ -14,5 +15,9 @@ PgConnection.getInstance()
       console.log(`Server running at http://localhost:${env.port}${API}`)
       console.log(`Swagger at http://localhost:${env.port}${API}${SWAGGER}`)
     })
+
+    app.get('/Ping', (req: Request, res: Response) => {
+      res.send('Pong')
+  })
   })
   .catch(console.error)

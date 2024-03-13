@@ -28,9 +28,7 @@ export class PgConnection implements DbTransaction {
         username: env.postgres_username,
         password: env.postgres_password,
         database: env.postgres_database,
-        entities: ['src/**/*.entity.ts', 'dist/**/*.entity.js'],
-        synchronize: env.postgres_synchronize,
-        logging: env.postgres_logging
+        entities: ['src/**/*.entity.ts', 'dist/**/*.entity.js']
       })
     }
     return this.dataSource

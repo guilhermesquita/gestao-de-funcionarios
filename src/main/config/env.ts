@@ -5,7 +5,7 @@ export const env = {
   postgres_port: process.env.POSTGRES_PORT ?? 5432,
   postgres_username: process.env.POSTGRES_USERNAME ?? 'postgres',
   postgres_password: process.env.POSTGRES_PASSWORD ?? 'postgres',
-  postgres_database: process.env.POSTGRES_DATABASE ?? 'skepfy',
+  postgres_database: process.env.POSTGRES_DATABASE ?? 'taskmine',
   postgres_synchronize: handleBoolean(process.env.POSTGRES_SYNCHRONIZE),
   postgres_logging: handleBoolean(process.env.POSTGRES_LOGGING),
   keycloak_baseurl: process.env.KEYCLOAK_BASEURL ?? 'http://localhost:8080',

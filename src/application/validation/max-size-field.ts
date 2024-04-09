@@ -1,4 +1,4 @@
-import { Validation } from '@/application/contracts'
+import { Validation } from 'application/contracts'
 import { MaxSizeParamError } from '../errors'
 
 export class MaxSizeField implements Validation {

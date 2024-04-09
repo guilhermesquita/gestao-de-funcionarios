@@ -1,26 +1,30 @@
 import express, { Request, Response } from "express";
 import { db } from "../infra/repos/firebase/helpers";
-  
-  // Express
-  const app = express();
-  
-  app.use(express.json());
-  
-  app.listen(Number(process.env.PORT || 3005), () => {
-      console.log(`Servidor rodando na porta ${process.env.PORT}`);
-  });
+import { env } from "process";
+import { API } from "../utils/constants";
+import { app } from "./config/app";
 
-app.get('/Ping', (req: Request, res: Response) => {
+// Express
+const apps = app;
+
+apps.use(express.json());
+
+apps.listen(env.port, () => {
+  console.log(`Server running at http://localhost:${env.port}${API}`)
+  // console.log(`Swagger at http://localhost:${env.port}${API}${SWAGGER}`)
+})
+
+apps.get('/Ping', (_req: Request, res: Response) => {
   res.send('pong')
 })
 
-app.get('/test', async (req: Request, res: Response) => {
+apps.get('/test', async (_req: Request, res: Response) => {
   try {
     // Aguarde a resolução da Promise
-    const snapshot = await db.collection('employee').get();
+    const employee = await db.collection('employee').get();
 
-    // Mapeie os dados do snapshot para um array
-    const data = snapshot.docs.map(doc => doc.data());
+    // Mapeie os dados do employee para um array
+    const data = employee.docs.map(doc => doc.data());
 
     // Envie os dados como resposta
     res.json(data)

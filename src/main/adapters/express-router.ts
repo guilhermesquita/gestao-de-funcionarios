@@ -1,4 +1,4 @@
-import { Controller } from '@/application/contracts'
+import { Controller } from 'application/contracts'
 import { Request, Response } from 'express'
 
 export const adaptExpressRoute = (controller: Controller) => {

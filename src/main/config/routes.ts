@@ -1,4 +1,4 @@
-import { API } from '@/utils/constants';
+import { API } from '../../utils/constants';
 import { Router, Express } from 'express';
 import { readdirSync } from 'fs';
 import { join } from 'path';

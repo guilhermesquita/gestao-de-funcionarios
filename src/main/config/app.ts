@@ -1,17 +1,10 @@
-import setupMiddlewares from '@/main/config/middlewares'
-import setupSwagger from '@/main/config/swagger'
-import { setupRoutes } from '@/main/config/routes'
+// import setupMiddlewares from '@/main/config/middlewares'
+// import setupSwagger from '@/main/config/swagger'
 import express from 'express'
-// import keycloak from './keycloak'
+import { setupRoutes } from './routes'
 
 const app = express()
-// app.use(
-//   keycloak.middleware({
-//     logout: '/logout',
-//     admin: '/'
-//   })
-// )
-setupSwagger(app)
-setupMiddlewares(app)
+// setupSwagger(app)
+// setupMiddlewares(app)
 setupRoutes(app)
 export { app }

@@ -1,8 +1,4 @@
-import {
-  DbTransaction,
-  Controller,
-  HttpResponse
-} from '@/application/contracts'
+import { Controller, DbTransaction, HttpResponse } from "application/contracts"
 
 export class DbTransactionController implements Controller {
   constructor(

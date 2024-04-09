@@ -1,5 +1,5 @@
-import { PgConnection } from '@/infra/repos/postgres/helpers'
+import { db } from '../../../../../../infra/repos/firebase/helpers'
 
-export const makePgConnection = (): PgConnection => {
-  return PgConnection.getInstance()
+export const makePgConnection = () => {
+  return db
 }

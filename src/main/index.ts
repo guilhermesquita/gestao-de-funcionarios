@@ -17,7 +17,7 @@ app.get('/Ping', (req: Request, res: Response) => {
 app.get('/test', async (req: Request, res: Response) => {
   try {
     // Aguarde a resolução da Promise
-    const snapshot = await db.collection('teste').get();
+    const snapshot = await db.collection('employee').get();
 
     // Mapeie os dados do snapshot para um array
     const data = snapshot.docs.map(doc => doc.data());

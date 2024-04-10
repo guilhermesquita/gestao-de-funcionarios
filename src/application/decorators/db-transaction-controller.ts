@@ -1,22 +1,25 @@
-import { Controller, DbTransaction, HttpResponse } from "application/contracts"
+import { FirestoreTransaction } from "../../infra/repos/firebase/helpers/transaction";
+import { Controller, HttpResponse } from "application/contracts";
+const admin = require('firebase-admin');
 
-export class DbTransactionController implements Controller {
+export class FirestoreTransactionController implements Controller {
   constructor(
     private readonly decoratee: Controller,
-    private readonly db: DbTransaction
+    private readonly db: FirestoreTransaction
   ) {}
 
   async handle(httpRequest: any): Promise<HttpResponse> {
-    await this.db.openTransaction()
+    const transaction = new FirestoreTransaction();
+    await transaction.openTransaction();// Verifique se a propriedade 'db' está definida corretamente
     try {
-      const httpResponse = await this.decoratee.handle(httpRequest)
-      await this.db.commit()
-      return httpResponse
+      const httpResponse = await this.decoratee.handle(httpRequest);
+      await transaction.commit();
+      return httpResponse;
     } catch (error) {
-      await this.db.rollback()
-      throw error
+      await transaction.rollback();
+      throw error;
     } finally {
-      await this.db.closeTransaction()
+      await transaction.closeTransaction();
     }
   }
 }

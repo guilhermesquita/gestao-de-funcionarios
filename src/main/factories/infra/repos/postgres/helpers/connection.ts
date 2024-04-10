@@ -1,5 +1,6 @@
-import { db } from '../../../../../../infra/repos/firebase/helpers'
+import * as admin from 'firebase-admin';
 
-export const makePgConnection = () => {
-  return db
-}
+export const makeFirestoreConnection = () => {
+  // Retorne uma instância do Firestore
+  return admin.firestore();
+};

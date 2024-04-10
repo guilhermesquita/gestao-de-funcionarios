@@ -1,6 +1,6 @@
 import { Controller } from "application/contracts"
 import { makeDbAddEmployee } from "../../domain/usecases"
-import { makePgTransactionController } from "../decorators"
+import { makeFirestoreTransactionController } from "../decorators"
 import { makeAddEmployeeValidation } from "./add-employee-controller-validation-factory"
 import { AddEmployeeController } from "../../../../application/controllers"
 
@@ -9,5 +9,5 @@ export const makeAddEmployeeController = (): Controller => {
     makeDbAddEmployee(),
     makeAddEmployeeValidation()
   )
-  return makePgTransactionController(controller)
+  return makeFirestoreTransactionController(controller)
 }

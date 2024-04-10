@@ -1,9 +1,11 @@
-import { Controller } from 'application/contracts'
-import { makePgConnection } from '../../infra/repos/postgres/helpers/connection'
-import { DbTransactionController } from '../../../../application/decorators'
+import { Controller } from 'application/contracts';
+import { FirestoreTransactionController } from '../../../../application/decorators';
+// import { FirestoreTransaction } from '../../../../infra/repos/firebase/helpers';
+const admin = require('firebase-admin');
 
-export const makePgTransactionController = (
+export const makeFirestoreTransactionController = (
   controller: Controller
-): DbTransactionController => {
-  return new DbTransactionController(controller, makePgConnection())
-}
+): FirestoreTransactionController => {
+  // const firestoreTransaction = new FirestoreTransaction(); // Sem parâmetros
+  return new FirestoreTransactionController(controller, admin.firestore());
+};

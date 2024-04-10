@@ -22,3 +22,8 @@ export const db = admin.firestore();
 
 // Exporte o Firestore
 module.exports = { db };
+
+export const makeFirestoreConnection = () => {
+  // Retorne uma instância do Firestore
+  return admin.firestore();
+};

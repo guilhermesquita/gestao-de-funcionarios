@@ -10,6 +10,7 @@ import { AddEmployee } from "domain/contracts/repos"
   
     async handle(request: AddEmployeeController.Request): Promise<HttpResponse> {
       try {
+        console.log(request)
         const error = this.validation.validate(request)
         if (error) {
           return badRequest(error)
@@ -24,7 +25,7 @@ import { AddEmployee } from "domain/contracts/repos"
           dt_birth,      
           admission_date,           
           profile_pic,
-           salary
+          salary
         } = request
         const result = await this.addEmployee.add({
             employee_name: employee_name,

@@ -1,6 +1,5 @@
 import { FirestoreTransaction } from "../../infra/repos/firebase/helpers/transaction";
 import { Controller, HttpResponse } from "application/contracts";
-const admin = require('firebase-admin');
 
 export class FirestoreTransactionController implements Controller {
   constructor(
@@ -9,17 +8,16 @@ export class FirestoreTransactionController implements Controller {
   ) {}
 
   async handle(httpRequest: any): Promise<HttpResponse> {
-    const transaction = new FirestoreTransaction();
-    await transaction.openTransaction();// Verifique se a propriedade 'db' está definida corretamente
+    await this.db.openTransaction();// Verifique se a propriedade 'db' está definida corretamente
     try {
       const httpResponse = await this.decoratee.handle(httpRequest);
-      await transaction.commit();
+      await this.db.commit();
       return httpResponse;
     } catch (error) {
-      await transaction.rollback();
+      await this.db.rollback();
       throw error;
     } finally {
-      await transaction.closeTransaction();
+      await this.db.closeTransaction();
     }
   }
 }

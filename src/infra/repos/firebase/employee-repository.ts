@@ -13,7 +13,7 @@ export class FbEmployeeRepository implements AddEmployee {
                 statusCode: 201
               }
         } catch (error) {
-            console.error('Erro ao adicionar funcionário:', error);
+            // console.error('Erro ao adicionar funcionário:', error);
             throw error;
         }
     };  

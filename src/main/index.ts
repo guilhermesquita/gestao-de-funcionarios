@@ -7,8 +7,6 @@ import { app } from "./config/app";
 // Express
 const apps = app;
 
-apps.use(express.json());
-
 apps.listen(env.port, () => {
   console.log(`Server running at http://localhost:${env.port}${API}`)
   // console.log(`Swagger at http://localhost:${env.port}${API}${SWAGGER}`)
@@ -17,6 +15,11 @@ apps.listen(env.port, () => {
 apps.get('/Ping', (_req: Request, res: Response) => {
   res.send('pong')
 })
+
+// apps.post('/Ping', async (req: Request, _res: Response) => {
+//   const teste = await req.body
+//   // console.log(teste)
+// })
 
 apps.get('/test', async (_req: Request, res: Response) => {
   try {

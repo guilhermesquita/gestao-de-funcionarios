@@ -1,17 +1,18 @@
-import { Controller } from 'application/contracts'
-import { Request, Response } from 'express'
+import { Controller } from '@/application/contracts'
+import { RequestHandler } from 'express'
 
-export const adaptExpressRoute = (controller: Controller) => {
-  return async (req: Request, res: Response) => {
-    const request = {
-      ...(req.body || {}),
-      ...(req.params || {})
-    }
-    const httpResponse = await controller.handle(request)
-    if (httpResponse.statusCode >= 200 && httpResponse.statusCode <= 299) {
-      res.status(httpResponse.statusCode).json(httpResponse.body)
-    } else {
-      res.status(httpResponse.statusCode).json(httpResponse)
-    }
-  }
+type Adapter = (controller: Controller) => RequestHandler
+
+export const adaptExpressRoute: Adapter = controller => async (req, res) => {
+  const httpResponse = await controller.handle({
+    ...req.body,
+    ...req.params,
+    ...req.query,
+    ...req.locals
+  })
+  console.log(req.body)
+  const json = [200, 201, 204].includes(httpResponse.statusCode)
+    ? httpResponse.body
+    : { error: httpResponse }
+  res.status(httpResponse.statusCode).json(json)
 }
